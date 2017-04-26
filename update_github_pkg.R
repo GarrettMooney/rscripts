@@ -4,8 +4,8 @@ update_github_pkgs <- function() {
   # check/load necessary packages
   # devtools package
   if (!("package:devtools" %in% search())) {
-    tryCatch(require(devtools), error = function(x) {warning(x); cat("Cannot load devtools package \n")})
-    on.exit(detach("package:devtools", unload=TRUE))
+    tryCatch(require(devtools), error = function(x) { warning(x); cat("Cannot load devtools package \n") })
+    on.exit(detach("package:devtools", unload = TRUE))
   }
   
   pkgs <- installed.packages(fields = "RemoteType")
