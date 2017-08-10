@@ -1,4 +1,5 @@
 ## cran pkgs ===================================================================
+`%nin%` <- Negate(`%in%`)
 update.packages(ask = F)
 
 install.packages("CausalImpact")
@@ -22,7 +23,9 @@ install.packages("xgboost",
                  type="source")
 
 # needs rstan first
-# source("install_rstan.R")
+if("rstan" %nin% rownames(installed.packages())) { 
+  source("install_rstan.R") 
+}
 install.packages("prophet")
 
 # remove current version first

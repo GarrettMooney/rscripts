@@ -24,7 +24,7 @@ install.packages("rstan",
                  dependencies=TRUE)
 
 ## Restart & verify toolchain
-fx <- inline::cxxfunction( signature(x = "integer", y = "numeric" ) , '
-	return ScalarReal( INTEGER(x)[0] * REAL(y)[0] ) ;
-' )
-fx( 2L, 5 ) # should be 10
+# fx <- inline::cxxfunction( signature(x = "integer", y = "numeric" ) , '
+# 	return ScalarReal( INTEGER(x)[0] * REAL(y)[0] ) ;
+# ' )
+# fx( 2L, 5 ) # should be 10
