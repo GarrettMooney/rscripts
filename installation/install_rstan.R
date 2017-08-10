@@ -1,0 +1,30 @@
+## before install
+# run once
+dotR <- file.path(Sys.getenv("HOME"), ".R")
+if (!file.exists(dotR)) dir.create(dotR)
+M <- file.path(dotR, "Makevars")
+if (!file.exists(M)) file.create(M)
+cat("\nCXXFLAGS=-O3 -mtune=native -march=native -Wno-unused-variable -Wno-unused-function", 
+    file = M, sep = "\n", append = TRUE)
+
+# if g++ version > 4.9
+cat("\nCXXFLAGS+=-flto -ffat-lto-objects  -Wno-unused-local-typedefs", 
+    file = M, sep = "\n", append = TRUE)
+
+# verify correct config
+cat(readLines(M), sep = "\n")
+cat(M)
+
+## install
+Sys.setenv(MAKEFLAGS = "-j8")
+
+# note: omit the 's' in 'https' if you cannot handle https downloads
+install.packages("rstan", 
+                 repos = "https://cloud.r-project.org/", 
+                 dependencies=TRUE)
+
+## Restart & verify toolchain
+fx <- inline::cxxfunction( signature(x = "integer", y = "numeric" ) , '
+	return ScalarReal( INTEGER(x)[0] * REAL(y)[0] ) ;
+' )
+fx( 2L, 5 ) # should be 10
