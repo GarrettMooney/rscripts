@@ -4,7 +4,8 @@
 # update.packages(ask=F)
 # upd8 <- update_github_pkgs()
 # library(tidyverse)
-# upd8 %>% enframe %>% unnest %>% filter(value)
+# upd8 %>% data.frame %>% gather %>% filter(value)
+# upd8 %>% enframe %>% unnest %>% filter(value) # didn't work 27-08-2017; b/c of `colformat`?
 
 update_github_pkgs <- function() {
   if (!("package:devtools" %in% search())) {
